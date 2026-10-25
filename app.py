@@ -1,4 +1,15 @@
-﻿import re
+﻿
+import re
+
+
+def validate_email(email):
+    if not isinstance(email, str):
+        return False
+
+    return bool(
+        re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email)
+    )
+
 
 def validate_student(name, age, email):
     if not isinstance(name, str) or not name.strip():
@@ -7,10 +18,4 @@ def validate_student(name, age, email):
     if not isinstance(age, int) or isinstance(age, bool) or age <= 0:
         return False
 
-    if not isinstance(email, str):
-        return False
-
-    if not re.fullmatch(r"[^@\s]+@[^@\s]+\.[^@\s]+", email):
-        return False
-
-    return True
+    return validate_email(email)
